@@ -7,19 +7,6 @@ use Nette\Application\UI\Form;
 
 
 /**
- * @method CartControl setShowImage($showImage)
- * @method CartControl setShowName($showName)
- * @method CartControl setShowPrice($showPrice)
- * @method CartControl setShowQuantity($showQuantity)
- * @method CartControl setShowTotalWithoutVat($showTotalWithoutVat)
- * @method CartControl setShowTotal($showTotal)
- * @method CartControl setShowDelete($showDelete)
- * @method CartControl setImageWidth(int $imageWidth)
- * @method CartControl setImageHeight(int $imageHeight)
- * @method CartControl setNextName(string $nextName)
- * @method CartControl setContinueName(string $continueName)
- * @method CartControl setUpdateName(string $updateName)
- *
  * @method boolean isShowImage($showImage)
  * @method boolean isShowName($showName)
  * @method boolean isShowPrice($showPrice)
@@ -94,6 +81,53 @@ class CartControl extends Control
 		$this->templateFile = __DIR__ . '/templates/CartControl.latte';
 	}
 
+	public function setShowImage( $showImage ) {
+		$this->showImage = $showImage;
+	}
+
+	public function setShowName($showName) {
+		$this->showName = $showName;
+	}
+
+	public function setShowPrice($showPrice) {
+		$this->showPrice = $showPrice;
+	}
+
+	public function setShowQuantity($showQuantity) {
+		$this->showQuantity = $showQuantity;
+	}
+
+	public function setShowTotalWithoutVat($showTotalWithoutVat) {
+		$this->showTotalWithoutVat = $showTotalWithoutVat;
+	}
+
+	public function setShowTotal($showTotal) {
+		$this->showTotal = $showTotal;
+	}
+
+	public function setShowDelete($showDelete) {
+		$this->showDelete = $showDelete;
+	}
+
+	public function setImageWidth(int $imageWidth) {
+		$this->imageWidth = $imageWidth;
+	}
+
+	public function setImageHeight(int $imageHeight) {
+		$this->imageHeight = $imageHeight;
+	}
+
+	public function setNextName(string $nextName) {
+		$this->nextName = $nextName;
+	}
+
+	public function setContinueName(string $continueName) {
+		$this->continueName = $continueName;
+	}
+
+	public function setUpdateName(string $updateName) {
+		$this->updateName = $updateName;
+	}
 
 	public function render(array $options = [])
 	{

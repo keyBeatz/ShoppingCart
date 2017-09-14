@@ -1,6 +1,6 @@
 {if $cart->empty}
 <p>
-	{_'Your cart is empty.'}
+	Váš košík je prázdný
 </p>
 
 {else}
@@ -8,16 +8,71 @@
 {form updateForm class=>'form-inline'}
 	<div n:foreach="$form->errors as $error" class="alert alert-error fade in">
 		<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-		{_$error}
+		{$error}
 	</div>
+
+	<div class="table-responsive">
+		<table class="table base_table">
+			<thead>
+				<tr>
+					<th><span>POLOŽKA:</span></th>
+					<th><span>MNOŽSTVO:</span></th>
+					<th><span>JEDNOTKOVÁ CENA S DPH:</span></th>
+					<th><span>CELKOVÁ CENA S DPH:</span></th>
+				</tr>
+			</thead>
+			<tbody n:inner-foreach="$cart->getItems() as $key => $item">
+				<tr>
+					<td>
+						<a href="#">
+							<div class="cart_step1_table_first">
+								{*
+								<div class="cart_step1_img">
+									<img src="{$item->image|thumbnail: $imageWidth, $imageHeight}">
+								</div>
+								*}
+								<div class="cart_step1_itemName">
+									<a n:tag-if="$item->link" href="{$presenter->link($item->link, $item->linkArgs)}" title="{$item->name}">{$item->name}</a><br>
+                                    {foreach $item->options as $name => $option}
+										<strong>{$name}:</strong> {$option}{sep}, {/sep}
+                                    {/foreach}
+								</div>
+							</div>
+						</a>
+					</td>
+					<td><span class="cart_step1_quantity">{$item->quantity} ks</span></td>
+					<td>{$item->price|price}</td>
+					<td>{$item->total|price}</td>
+				</tr>
+
+			</tbody>
+			<tfoot>
+				<tr>
+					<td></td>
+					<td></td>
+					<td class="cart_step1_tfoot_summ">
+						<div>CELKOVÁ CENA BEZ DPH:</div>
+						<div>DPH:</div>
+						<div>CELKOVÁ CENA S DPH:</div>
+					</td>
+					<td class="cart_step1_tfoot_price">
+						<div>{$cart->total|price}</div>
+						<div>{$cart->total|price}</div>
+						<div>{$cart->total|price}</div>
+					</td>
+				</tr>
+			</tfoot>
+		</table>
+	</div>
+{*
 	<table class="table table-hover table-striped" id="cart">
 		<thead>
 			<tr>
-				<th n:if="$showImage+$showName" class="name" colspan="{$showImage+$showName}">{_Product}</th>
-				<th n:if="$showPrice" class="price">{_Price}</th>
-				<th n:if="$showQuantity" class="quantity">{_Quantity}</th>
-				<th n:if="$showTotalWithoutVat" class="total-without-vat">{_'Total without VAT'}</th>
-				<th n:if="$showTotal" class="total">{_'Total'}</th>
+				<th n:if="$showImage+$showName" class="name" colspan="{$showImage+$showName}">Produkt</th>
+				<th n:if="$showPrice" class="price">Cena</th>
+				<th n:if="$showQuantity" class="quantity">Množství</th>
+				<th n:if="$showTotalWithoutVat" class="total-without-vat">Cena bez DPH</th>
+				<th n:if="$showTotal" class="total">Celková cena</th>
 				<th n:if="$showDelete" class="delete"></th>
 			</tr>
 		</thead>
@@ -45,15 +100,15 @@
 		<tfoot>
 			<tr>
 				<td n:if="$showImage+$showName+$showPrice" colspan="{$showImage+$showName+$showPrice}"></td>
-				<td n:if="$showQuantity"><button class="btn btn-warning" type="submit" name="update"><i class="fa fa-refresh"></i> {_$updateName}</button></td>
+				{*<td n:if="$showQuantity"><button class="btn btn-warning" type="submit" name="update"><i class="fa fa-refresh"></i> {$updateName}</button></td>*}{*
 				<td n:if="$showTotalWithoutVat+$showTotal+$showDelete" colspan="{$showTotalWithoutVat+$showTotal+$showDelete}" class="total">
-					<strong>{_'Total'}:&nbsp;&nbsp;<span>{$cart->total|price}</span></strong>
+					<strong>Celkem:&nbsp;&nbsp;<span>{$cart->total|price}</span></strong>
 				</td>
 			</tr>
 		</tfoot>
 	</table>
-	<button class="btn btn-default pull-left" type="submit" name="continue"><i class="fa fa-arrow-circle-left">&nbsp; {_$continueName}</i></button>
-	<button class="btn btn-success btn-lg pull-right" type="submit" name="next">{_$nextName} &nbsp;<i class="fa fa-arrow-circle-right"></i></button>
+	<a class="btn btn-default pull-left" href="{plink :Front:Shop:}"><i class="fa fa-arrow-circle-left">&nbsp; Pokračovat v nákupu</i></a>
+	<button class="btn btn-success btn-lg pull-right" type="submit" name="next">Dokončit objednávku &nbsp;<i class="fa fa-arrow-circle-right"></i></button>*}
 {/form}
 
 {/if}

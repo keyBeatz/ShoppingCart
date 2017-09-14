@@ -9,7 +9,7 @@ use Nette\InvalidArgumentException;
 /**
  * @method Item[] getItems()
  */
-class Cart extends Object 
+class Cart extends Object implements \Countable
 {
 
 	/** @var Item[] */
@@ -113,6 +113,18 @@ class Cart extends Object
 		$options = (array)$options;
 		sort($options);
 		return md5($id . '-' . serialize($options));
+	}
+
+	public function count() {
+		$i = 0;
+
+		if( empty( $this->items ) )
+			return 0;
+
+		foreach( $this->items as $item )
+			$i++;
+
+		return $i;
 	}
 
 }

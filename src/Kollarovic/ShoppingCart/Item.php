@@ -32,7 +32,7 @@ use Nette\Object;
  * @method array getOptions()
  * @method array getData()
  */
-class Item extends Object 
+class Item extends Object
 {
 	
 	/** @var int */
@@ -122,5 +122,6 @@ class Item extends Object
 	{
 		return $this->getPriceWithoutVat() * $this->quantity;
 	}
+
 
 }
